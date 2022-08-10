@@ -33,5 +33,9 @@
             </StackPanel>
         </StackPanel>
 
+        <DataGrid x:Name="UserDataGrid" Grid.Column="1">
+            
+        </DataGrid>
+
     </Grid>
 </Window>

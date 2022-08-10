@@ -17,9 +17,22 @@ namespace UserDatabaseGUIApp
 {
     public partial class MainWindow : Window
     {
+        
+
         public MainWindow()
         {
             InitializeComponent();
+            GiveDataToGrid();
+
+        }
+
+        public void GiveDataToGrid()
+        {
+            using(var context = new UserDB())
+            {
+                var query = from user in context.Users select user;
+                UserDataGrid.ItemsSource = query.ToList() ;
+            }
         }
     }
 }
