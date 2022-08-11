@@ -18,13 +18,15 @@ namespace UserDatabaseGUIApp
 {
     public partial class MainWindow : Window
     {
+        User currentSelectedUser;
+
         public MainWindow()
         {
             InitializeComponent();
             GiveDataToGrid();
         }
 
-        public void GiveDataToGrid()
+        private void GiveDataToGrid()
         {
             using (var context = new UserDB())
             {
@@ -37,11 +39,11 @@ namespace UserDatabaseGUIApp
         {
             try
             {
-                User user = (User)UserDataGrid.SelectedItem;
+                currentSelectedUser = (User)UserDataGrid.SelectedItem;
 
-                IDTextBox.Text = user.ID.ToString();
-                UsernameTextBox.Text = user.Username;
-                PasswordTextBox.Text = user.Password;
+                IDTextBox.Text = currentSelectedUser.ID.ToString();
+                UsernameTextBox.Text = currentSelectedUser.Username;
+                PasswordTextBox.Text = currentSelectedUser.Password;
             }
             catch (Exception ex)
             {
@@ -54,6 +56,25 @@ namespace UserDatabaseGUIApp
         private void AddUserButton(object sender, RoutedEventArgs e)
         {
 
+            if(String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
+            {
+                return;
+            }
+            else
+            {
+                using (var context = new UserDB())
+                {
+                    var user = new User();
+                    user.Username = UsernameTextBox.Text;
+                    user.Password = PasswordTextBox.Text;
+
+                    context.Add(user);
+
+                    context.SaveChanges();
+
+                    GiveDataToGrid();
+                }
+            }
         }
 
         private void UpdateUserButton(object sender, RoutedEventArgs e)
@@ -63,7 +84,7 @@ namespace UserDatabaseGUIApp
 
         private void RemoveUserButton(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
