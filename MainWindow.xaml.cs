@@ -50,5 +50,20 @@ namespace UserDatabaseGUIApp
                 PasswordTextBox.Text = "";
             }
         }
+
+        private void AddUserButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateUserButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveUserButton(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

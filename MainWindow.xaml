@@ -27,15 +27,13 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
-                <Button Padding="10" Margin="10,0" Content="Add user"/>
-                <Button Padding="10" Content="Update User"/>
-                <Button Padding="10" Margin="10,0" Content="Remove User"/>
+                <Button Padding="10" Margin="10,0" Content="Add user" Click="AddUserButton"/>
+                <Button Padding="10" Content="Update User" Click="UpdateUserButton"/>
+                <Button Padding="10" Margin="10,0" Content="Remove User" Click="RemoveUserButton"/>
             </StackPanel>
         </StackPanel>
 
-        <DataGrid SelectionChanged="UserDataGrid_SelectionChanged" x:Name="UserDataGrid" Grid.Column="1" HorizontalAlignment="Center" Width="300">
-            
-        </DataGrid>
+        <DataGrid SelectionChanged="UserDataGrid_SelectionChanged" x:Name="UserDataGrid" Grid.Column="1" HorizontalAlignment="Center" Width="300"/>
 
     </Grid>
 </Window>
