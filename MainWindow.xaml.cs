@@ -37,7 +37,7 @@ namespace UserDatabaseGUIApp
         private void AddUserButton(object sender, RoutedEventArgs e)
         {
 
-            if(String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
+            if (String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
             {
                 return;
             }
@@ -92,7 +92,35 @@ namespace UserDatabaseGUIApp
 
         private void RemoveUserButton(object sender, RoutedEventArgs e)
         {
-            
+
+            string id = IDTextBox.Text;
+
+            int idAsIntvalue;
+            bool isNumber = int.TryParse(id, out idAsIntvalue);
+            if (isNumber)
+            {
+                using (var context = new UserDB())
+                {
+                    var user = context.Users.Find(idAsIntvalue);
+                    //var query = from test in context.Users where test.ID == idAsIntvalue select test;  // would be like .find();
+                    
+                    if(user != null)
+                    {
+                        context.Remove(user);
+                        context.SaveChanges();
+                        GiveDataToGrid();
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
