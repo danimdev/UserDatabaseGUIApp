@@ -53,6 +53,9 @@ namespace UserDatabaseGUIApp
 
                     context.SaveChanges();
 
+                    UsernameTextBox.Text = "";
+                    PasswordTextBox.Text = "";
+
                     GiveDataToGrid();
                 }
             }
