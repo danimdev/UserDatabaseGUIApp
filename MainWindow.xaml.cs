@@ -36,7 +36,6 @@ namespace UserDatabaseGUIApp
 
         private void AddUserButton(object sender, RoutedEventArgs e)
         {
-
             if (String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
             {
                 return;
@@ -46,6 +45,7 @@ namespace UserDatabaseGUIApp
                 using (var context = new UserDB())
                 {
                     var user = new User();
+
                     user.Username = UsernameTextBox.Text;
                     user.Password = PasswordTextBox.Text;
 
@@ -65,6 +65,7 @@ namespace UserDatabaseGUIApp
 
             int idAsIntvalue;
             bool isNumber = int.TryParse(id, out idAsIntvalue);
+
             if (isNumber)
             {
                 if (String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
@@ -77,7 +78,7 @@ namespace UserDatabaseGUIApp
                     {
                         var user = context.Users.Find(idAsIntvalue);
 
-                        if(user != null)
+                        if (user != null)
                         {
                             if (user.Username != UsernameTextBox.Text || user.Password != PasswordTextBox.Text)
                             {
@@ -108,30 +109,27 @@ namespace UserDatabaseGUIApp
 
             int idAsIntvalue;
             bool isNumber = int.TryParse(id, out idAsIntvalue);
+
             if (isNumber)
             {
                 using (var context = new UserDB())
                 {
                     var user = context.Users.Find(idAsIntvalue);
+
                     //var query = from test in context.Users where test.ID == idAsIntvalue select test;  // would be like .find();
-                    
-                    if(user != null)
+
+                    if (user != null)
                     {
                         context.Remove(user);
                         context.SaveChanges();
                         GiveDataToGrid();
                     }
                     else
-                    {
                         return;
-                    }
-
                 }
             }
             else
-            {
                 return;
-            }
         }
     }
 }
