@@ -77,18 +77,21 @@ namespace UserDatabaseGUIApp
                     {
                         var user = context.Users.Find(idAsIntvalue);
 
-                        if(user != null && user.Username != UsernameTextBox.Text && user.Password != PasswordTextBox.Text)
+                        if(user != null)
                         {
-                            user.Username = UsernameTextBox.Text;
-                            user.Password = PasswordTextBox.Text;
+                            if (user.Username != UsernameTextBox.Text || user.Password != PasswordTextBox.Text)
+                            {
+                                user.Username = UsernameTextBox.Text;
+                                user.Password = PasswordTextBox.Text;
 
-                            context.SaveChanges();
-                            GiveDataToGrid();
+                                context.SaveChanges();
+                                GiveDataToGrid();
+                            }
+                            else
+                                return;
                         }
                         else
-                        {
                             return;
-                        }
                     }
                 }
             }
