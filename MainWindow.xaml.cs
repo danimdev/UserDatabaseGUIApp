@@ -76,11 +76,19 @@ namespace UserDatabaseGUIApp
                     using (var context = new UserDB())
                     {
                         var user = context.Users.Find(idAsIntvalue);
-                        user.Username = UsernameTextBox.Text;
-                        user.Password = PasswordTextBox.Text;
 
-                        context.SaveChanges();
-                        GiveDataToGrid();
+                        if(user != null && user.Username != UsernameTextBox.Text && user.Password != PasswordTextBox.Text)
+                        {
+                            user.Username = UsernameTextBox.Text;
+                            user.Password = PasswordTextBox.Text;
+
+                            context.SaveChanges();
+                            GiveDataToGrid();
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
                 }
             }
