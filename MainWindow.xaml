@@ -15,15 +15,15 @@
         <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10,10">
                 <Label Content="ID: "/>
-                <TextBox x:Name="IDTextBox" Margin="42,0" Width="200"/>
+                <TextBox x:Name="IDTextBox" Text="{Binding SelectedItem.ID ,ElementName=UserDataGrid}" Margin="42,0" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,0">
                 <Label Content="Username: "/>
-                <TextBox x:Name="UsernameTextBox" Width="200"/>
+                <TextBox x:Name="UsernameTextBox" Text="{Binding SelectedItem.Username ,ElementName=UserDataGrid}" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10,10">
                 <Label Content="Password: "/>
-                <TextBox x:Name="PasswordTextBox" Margin="4,0" Width="200"/>
+                <TextBox x:Name="PasswordTextBox" Text="{Binding SelectedItem.Password ,ElementName=UserDataGrid}" Margin="4,0" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
@@ -33,7 +33,7 @@
             </StackPanel>
         </StackPanel>
 
-        <DataGrid SelectionChanged="UserDataGrid_SelectionChanged" x:Name="UserDataGrid" Grid.Column="1" HorizontalAlignment="Center" Width="300"/>
+        <DataGrid x:Name="UserDataGrid" Grid.Column="1" HorizontalAlignment="Center" Width="300"/>
 
     </Grid>
 </Window>

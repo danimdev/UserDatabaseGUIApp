@@ -18,7 +18,6 @@ namespace UserDatabaseGUIApp
 {
     public partial class MainWindow : Window
     {
-        User currentSelectedUser;
 
         public MainWindow()
         {
@@ -32,24 +31,6 @@ namespace UserDatabaseGUIApp
             {
                 var query = from user in context.Users select user;
                 UserDataGrid.ItemsSource = query.ToList();
-            }
-        }
-
-        private void UserDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                currentSelectedUser = (User)UserDataGrid.SelectedItem;
-
-                IDTextBox.Text = currentSelectedUser.ID.ToString();
-                UsernameTextBox.Text = currentSelectedUser.Username;
-                PasswordTextBox.Text = currentSelectedUser.Password;
-            }
-            catch (Exception ex)
-            {
-                IDTextBox.Text = "";
-                UsernameTextBox.Text = "";
-                PasswordTextBox.Text = "";
             }
         }
 
@@ -80,6 +61,33 @@ namespace UserDatabaseGUIApp
         private void UpdateUserButton(object sender, RoutedEventArgs e)
         {
 
+            string id = IDTextBox.Text;
+
+            int idAsIntvalue;
+            bool isNumber = int.TryParse(id, out idAsIntvalue);
+            if (isNumber)
+            {
+                if (String.IsNullOrEmpty(UsernameTextBox.Text) || String.IsNullOrEmpty(PasswordTextBox.Text))
+                {
+                    return;
+                }
+                else
+                {
+                    using (var context = new UserDB())
+                    {
+                        var user = context.Users.Find(idAsIntvalue);
+                        user.Username = UsernameTextBox.Text;
+                        user.Password = PasswordTextBox.Text;
+
+                        context.SaveChanges();
+                        GiveDataToGrid();
+                    }
+                }
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void RemoveUserButton(object sender, RoutedEventArgs e)
